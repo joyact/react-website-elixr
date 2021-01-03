@@ -1,7 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { menuData } from '../data/MenuData';
+import { Button } from './Button';
 
 const Nav = styled.nav`
   display: flex;
@@ -10,18 +11,47 @@ const Nav = styled.nav`
   height: 60px;
   padding: 1rem 2rem;
   background-color: #000;
+  z-index: 100;
+  position: fixed;
+`;
+
+const NavLink = css`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 10px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
 `;
 
 const Logo = styled(Link)`
-  color: #fff;
+  ${NavLink}
+  font-style: italic;
 `;
 
 const MenuBars = styled.i``;
 
-const NavMenu = styled.div``;
+const NavMenu = styled.div`
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
 
 const NavMenuLinks = styled(Link)`
-  color: #fff;
+  ${NavLink}
+`;
+
+const NavBtn = styled.div`
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 function Navbar() {
@@ -36,6 +66,9 @@ function Navbar() {
           </NavMenuLinks>
         ))}
       </NavMenu>
+      <NavBtn>
+        <Button to="/contact">Contact Us</Button>
+      </NavBtn>
     </Nav>
   );
 }
