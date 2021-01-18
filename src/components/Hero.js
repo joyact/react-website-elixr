@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Button } from './Button';
 import { IoMdArrowRoundForward } from 'react-icons/io';
@@ -128,31 +128,50 @@ const NextArrow = styled(IoArrowForward)`
 `;
 
 function Hero({ slides }) {
+  const [current, setCurrent] = useState(0);
+  const length = slides.length;
+
+  const nextSlide = () => {
+    setCurrent(current === length - 1 ? 0 : current + 1);
+    // console.log(current);
+  };
+
+  const prevSlide = () => {
+    setCurrent(current === 0 ? length - 1 : current - 1);
+    // console.log(current);
+  };
+
+  if (!Array.isArray(slides) || slides.length <= 0) {
+    return null;
+  }
+
   return (
     <HeroSection>
       <HeroWrapper>
         {slides.map((slide, index) => (
           <HeroSlider key={index}>
-            <HeroSliderInner>
-              <HeroImage src={slide.image} alt={slide.alt} />
-              <HeroContent>
-                <h1>{slide.title}</h1>
-                <p>{slide.price}</p>
-                <Button
-                  to={slide.path}
-                  primary="true"
-                  style={{ maxWidth: '160px' }}
-                >
-                  {slide.label}
-                  <Arrow />
-                </Button>
-              </HeroContent>
-            </HeroSliderInner>
+            {index === current && (
+              <HeroSliderInner>
+                <HeroImage src={slide.image} alt={slide.alt} />
+                <HeroContent>
+                  <h1>{slide.title}</h1>
+                  <p>{slide.price}</p>
+                  <Button
+                    to={slide.path}
+                    primary="true"
+                    style={{ maxWidth: '160px' }}
+                  >
+                    {slide.label}
+                    <Arrow />
+                  </Button>
+                </HeroContent>
+              </HeroSliderInner>
+            )}
           </HeroSlider>
         ))}
         <SliderButtons>
-          <PrevArrow />
-          <NextArrow />
+          <PrevArrow onClick={prevSlide} />
+          <NextArrow onClick={nextSlide} />
         </SliderButtons>
       </HeroWrapper>
     </HeroSection>
