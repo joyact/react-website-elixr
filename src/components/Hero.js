@@ -144,7 +144,7 @@ function Hero({ slides }) {
         clearTimeout(timeout.current);
       }
     };
-  }, [current, timeout]);
+  }, [current, timeout, length]);
 
   const nextSlide = () => {
     if (timeout.current) {
