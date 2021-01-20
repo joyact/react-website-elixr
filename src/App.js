@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import GlobalStyle from './globalStyles';
 import { SliderOne } from './data/SliderData';
 import Dropdown from './components/Dropdown';
+import Info from './components/Info';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +19,7 @@ function App() {
       <Navbar toggle={toggle} />
       <Dropdown isOpen={isOpen} toggle={toggle} />
       <Hero slides={SliderOne} />
+      <Info />
     </>
   );
 }
